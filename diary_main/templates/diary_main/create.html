@@ -19,6 +19,9 @@
 
         {% bootstrap_form my_form %} <!--입력상자들-->
         <br>
+        <div id="map" style="width:100%;height:350px;"></div>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b1cecff12a8ce2189e4ab1ef565b2b3&libraries=services"></script>
+        <script src="/static/js/map.js"></script>
         <!--부트스트랩 사용을 위해 bootstrap form을 통해 my_form을 선언해서 사용-->
         <!--또한 부트스트랩을 사용하기 위해 클래스를 잡아줘야한다.-->
         <button type="submit" class="btn btn-primary">등록</button> <!--버튼 누르면 /bbs/create/로 보내겠다는 의미-->

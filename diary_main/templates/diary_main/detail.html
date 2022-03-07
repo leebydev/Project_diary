@@ -26,6 +26,10 @@
     {% endif %}
     <p>내용 : {{ post.b_content}}</p>
     <p>작성자 : {{ post.b_author}}</p>
+    <p>지도 :{{ post.b_map}}</p>
+    <div id="map" style="width:100%;height:350px;"></div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b1cecff12a8ce2189e4ab1ef565b2b3&libraries=services"></script>
+    <script src="/static/js/map_tmp.js"></script>
     <hr>
     <button class="btn btn-success"
             onclick="to_list()">리스트로 돌아가기</button>
@@ -34,6 +38,7 @@
             onclick="delete_post()">삭제</button>
     <button class="btn btn-warning"
             onclick="like_post()">좋아요</button>
+    <input type="hidden" id="map_location" value="{{ post.b_map}}">
 </div>
 <br><br>
 

@@ -11,13 +11,14 @@ class BoardForm(forms.ModelForm):
     class Meta:
         model = Board
         #fields = "__all__"
-        fields = ['b_title', 'b_img', 'b_author', 'b_content']
+        fields = ['b_title', 'b_img', 'b_author', 'b_content','b_map']
         #
         labels = {
             'b_title': '글 제목',
             'b_img': '이미지',
             'b_author': '글 작성자',
-            'b_content': '글 내용'
+            'b_content': '글 내용',
+            'b_map': '지도입력'
         }
         #
         widgets = {
@@ -38,7 +39,15 @@ class BoardForm(forms.ModelForm):
                     'class': 'form-control w-75',
                     'placeholder': '글 내용을 입력하세요!'
                 }
-            ),  # Textarea() : 여러 줄짜리 입력상자
+            ),
+            'b_map':forms.TextInput(
+                attrs={
+                    'placeholder': '주소를 입력하세요!',
+                    'id':'map_name',
+                    'onblur': 'focus_out()'
+
+                }
+            )# Textarea() : 여러 줄짜리 입력상자
         }
 
 #
