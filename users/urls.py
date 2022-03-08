@@ -28,6 +28,8 @@ app_name = 'users'
 urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('loginProcess/', views.login_process, name='login_process'),
+    # path('loginprocess/', views.login_process, name='login_process'),
     path('signup/', views.signup2, name='signup'),
+    path('test/', views.Home)
+    #path('do_duplicate_check/', views.do_duplicate_check, name='do_duplicate_check')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

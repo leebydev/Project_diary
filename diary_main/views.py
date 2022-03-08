@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from diary_main.models import Board, Comment
-from diary_main.forms import BoardForm
+from diary_main.forms import BoardForm, BoardDetailForm
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_safe
+from users.models import Member
 
 
 def b_list(request):
