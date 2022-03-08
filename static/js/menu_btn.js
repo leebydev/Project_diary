@@ -13,14 +13,15 @@ function delete_post() {
     if(result) {
         let queryString = "?post_id=" + $('#post_id').text()
         // "?post_id =6"
-        document.location.href = '/bbs/delete/' + queryString
+        document.location.href = '/diary_main/delete/' + queryString
     }
 }
 
-function  like_post() {
+function like_post() {
     let queryString = "?post_id=" + $('#post_id').text()
-    document.location.href = '/bbs/like/' + queryString
+    document.location.href = '/diary_main/like/' + queryString
 }
+
 // 댓글등록하는 AJAX
 function create_comment() {
     $.ajax({

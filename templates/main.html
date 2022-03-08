@@ -100,8 +100,8 @@
                         <p style= color:#ffff;>
 
                             {% if request.user.is_authenticated %}
-                            {{ user.username }}
-                            <img src="{{ users.image.url }}" width="50" height="50">
+                            {{ user.nickname }}
+                            <img src="{{ user.image.url }}" width="50" height="50">
                             <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
 
                             {% else %}

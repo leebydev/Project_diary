@@ -10,28 +10,72 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="/static/img/7log_icon.png" width="100" height="50"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="http://127.0.0.1:8000/"><img src="/static/img/7log_icon.png" width="100" height="50"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">About</a>
+                        <a class="nav-link" aria-current="page" href="/about/">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">how to use</a>
+                        <a class="nav-link" href="/howtouse/">how to use</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">DashBoard</a>
+                        <a class="nav-link active" aria-current="page" href="/dashboard/">DashBoard</a>
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-                    <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
 
-                    <p><a class="btn btn-lg btn-primary" href="#">Sign up</a></p>
+                    <!--
+                        # 사용자 정보가 호출이되면(로그인 상태라면)
+                        # 프로필 사진과 로그아웃 버튼이 보임
+                        {% if request.user.is_authenticated %}
+                        <img src="/static/img/L_002.png" width="50" height="50"> &nbsp;&nbsp;
+                        <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
+
+                        # 사용자 정보가 호출이 안되면(비로그인 상태라면)
+                        # 회원가입, 로그인 버튼과 문구가 화면에 나옴
+                        # &nbsp; 는 띄어쓰기 삽입하는 코드
+                        {% else %}
+                        7log와 함께 당신의 이야기를 시작해보세요! -> &nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-lg btn-primary" href="/users/login/">Sign up</a>
+                        <a class="btn btn-lg btn-info" href="/users/login/">login</a>
+
+                        # if문 완료
+                        {% endif %}
+                    -->
+                    <div>
+                        <p style= color:#ffff;>
+
+                            {% if request.user.is_authenticated %}
+                            {{ user.nickname }}
+                            <img src="{{ user.image.url }}" width="50" height="50">
+                            <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
+
+                            {% else %}
+                            7log와 함께 당신의 이야기를 시작해보세요! -> &nbsp;&nbsp;&nbsp;
+                            <a class="btn btn-lg btn-primary" href="/users/signup/">Sign up</a>
+                            <a class="btn btn-lg btn-info" href="/users/login/">login</a>
+
+                            {% endif %}
+                        </p>
+                    </div>
+<!--
+                    <p>
+                        {% if request.user.is_authenticated %}
+                        //<a class="btn btn-lg btn-primary invisible" href="/users/login/">Sign up</a>
+                        //<a class="btn btn-lg btn-primary invisible" href="/users/login/">login</a>
+                        <img src="/static/img/L_002.png" width="50" height="50">
+                        <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
+                        {% else %}
+                        <a class="btn btn-lg btn-info" href="/users/login/">login</a>
+                        {% endif %}
+                    </p>
+                    -->
 
                 </form>
             </div>

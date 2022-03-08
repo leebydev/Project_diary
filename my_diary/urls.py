@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from diary_main import views
 
-
+app_name = 'my_diary'
 # ROOT_URLConf
 # 여기까지의 경로는 => http://127.0.0.1:8000/
 urlpatterns = [

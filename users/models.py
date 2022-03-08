@@ -10,3 +10,6 @@ class Member(AbstractUser):
                               null=True)
     nickname = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.nickname
+

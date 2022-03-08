@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from diary_main.models import Board, Comment
+from diary_main.forms import BoardForm
+from django.http import JsonResponse, HttpResponse
 from diary_main.forms import BoardForm, BoardDetailForm
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_safe
+from users.views import login
+from users.models import Member
 from users.models import Member
 
 
@@ -19,6 +23,9 @@ def b_list(request):
 
 @require_http_methods(['GET', 'POST'])
 def b_create(request):
+    # if not request.session.get('users_member'):
+    #     return redirect('/users/login/')
+
     # request 방식이 GET인지 POST인지 구분해서 처리
     # 만약 GET 방식이면 빈 입력상자를 출력하고 POST 방식이면
     # 입력된 데이터를 이용해서 Database 처리
@@ -45,7 +52,8 @@ def b_create(request):
             # new_post = board_form.save(commit=False)  # 실제로 저장되지 않아요. 대신 객체를 리턴해요
             # new_post.b_like_count = 10
             # new_post.save()
-            return redirect('diary_main:b_list',)
+            return redirect('diary_main:b_list')
+
 
 @require_safe
 def b_detail(request, board_id):
@@ -68,10 +76,32 @@ def b_detail(request, board_id):
     # return render(request, 'diary_main/detail.html', context)
     post = Board.objects.get(pk=board_id)
     context = {
-        'post':post,
+        'post': post,
     }
     return render(request, 'diary_main/detail.html', context)
 
+
+# def b_delete(request):
+#     # QueryString으로 전달된 삭제할 글 번호부터 뽑아요
+#     post_id = request.GET['post_id']
+#     post = get_object_or_404(Board, pk=post_id)
+#     post.delete()
+#
+#     return redirect('bbs:b_list')
+
+
+# def b_like(request):
+#     post_id = request.GET['post_id']
+#     post = get_object_or_404(Board, pk=post_id)
+#     post.b_like_count += 1
+#     post.save()
+#
+#     board_detail_form = BoardDetailForm(instance=post)
+#     context = {
+#         "detail_form": board_detail_form
+#     }
+#
+#     return render(request, 'diary_main/detail.html', context)
 
 def b_delete(request):
     # QueryString으로 전달된 삭제할 글 번호부터 뽑아요
@@ -79,19 +109,22 @@ def b_delete(request):
     post = get_object_or_404(Board, pk=post_id)
     post.delete()
 
-    return redirect('bbs:b_list')
+    return redirect('diary_main:b_list')
 
 
 def b_like(request):
     post_id = request.GET['post_id']
     post = get_object_or_404(Board, pk=post_id)
     post.b_like_count += 1
+    context = {
+        'post': post
+    }
     post.save()
 
-    board_detail_form = BoardDetailForm(instance=post)
-    context = {
-        "detail_form": board_detail_form
-    }
+    # board_detail_form = BoardDetailForm(instance=post)
+    # context = {
+    #     "detail_form": board_detail_form
+    # }
 
     return render(request, 'diary_main/detail.html', context)
 
