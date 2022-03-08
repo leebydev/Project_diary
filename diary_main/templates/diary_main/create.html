@@ -4,7 +4,7 @@
 <!--프로젝트에 등록해놓은 bootstarp4를 load해서 불러들이고-->
 {% block html_header %}
 <script src="/static/js/menu_btn.js"></script> <!-- js형태로 static에 자바스크립트 만들고 경로를 설정해준다.-->
-
+<script src="/static/js/test.js"></script>
 {% endblock %}
 
 {% block html_body %}
@@ -54,7 +54,7 @@
 
                             {% if request.user.is_authenticated %}
                             {{ user.nickname }}
-                            <img src="{{ user.image.url }}" width="50" height="50">
+                            <img src="{{ users.image.url }}" width="50" height="50">
                             <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
 
                             {% else %}
@@ -112,7 +112,7 @@
                     {{ user.nickname }}
                 </span>
             {% endif %}
-            <script src="/static/js/test.js"></script>
+
     </form>
 </div>
 </main>
