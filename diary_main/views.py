@@ -1,15 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from diary_main.models import Board, Comment
-from diary_main.forms import BoardForm
+from diary_main.forms import BoardForm, BoardDetailForm, BoardUpdateForm
 from django.http import JsonResponse, HttpResponse
-from diary_main.forms import BoardForm, BoardDetailForm
-from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_safe
-from users.views import login
-from users.models import Member
-from users.models import Member
-
 
 def b_list(request):
     # if request.user.is_authenticated:
@@ -20,6 +14,7 @@ def b_list(request):
     return render(request, 'diary_main/list.html', context)
     # else:
     #     return redirect('home')
+
 
 @require_http_methods(['GET', 'POST'])
 def b_create(request):
@@ -61,24 +56,21 @@ def b_detail(request, board_id):
     # ModelForm을 이용해서 Database에서 가져온 내용을 화면에 출력
 
     # 1. board_id를 이용해서 게시글 1개를 가져와야 해요 (객체)
-    # post = get_object_or_404(Board, pk=board_id)
-    # # 2. 만들어놓은 BoarDetailForm이라는 ModelForm의 객체를
-    # #    위에서 만든 Board class의 객체인 post를 이용해서 생성
-    # board_detail_form = BoardDetailForm(instance=post)
-    # # 3. 댓글(Comment) 정보도 가져와야 해요
-    # comments = post.comment_set.all().order_by('-id')
-    #
-    # context = {
-    #     "detail_form": board_detail_form,
-    #     'comments': comments
-    # }
-    #
-    # return render(request, 'diary_main/detail.html', context)
     post = Board.objects.get(pk=board_id)
+    # 2. 만들어놓은 BoarDetailForm이라는 ModelForm의 객체를
+    #    위에서 만든 Board class의 객체인 post를 이용해서 생성
+    board_detail_form = BoardDetailForm(instance=post)
+    # 3. 댓글(Comment) 정보도 가져와야 해요
+    comments = post.comment_set.all().order_by('-id')
+
     context = {
+        "detail_form": board_detail_form,
+        'comments': comments,
         'post': post,
     }
+
     return render(request, 'diary_main/detail.html', context)
+
 
 
 # def b_delete(request):
@@ -110,7 +102,6 @@ def b_delete(request):
     post.delete()
 
     return redirect('diary_main:b_list')
-
 
 def b_like(request):
     post_id = request.GET['post_id']
@@ -150,7 +141,37 @@ def create_comment(request):
         json_dumps_params={'ensure_ascii': True})
 
 
+
+
+
 def delete_comment(request):
     comment = get_object_or_404(Comment, pk=request.GET['comment_id'])
     comment.delete()
     return JsonResponse({}, json_dumps_params={'ensure_ascii': True})
+
+
+
+
+def b_update(request, board_id):
+    post = get_object_or_404(Board, pk=board_id)
+    if request.method == 'GET':
+        # 2. 만들어놓은 BoarDetailForm이라는 ModelForm의 객체를
+        #    위에서 만든 Board class의 객체인 post를 이용해서 생성
+        board_update_form = BoardUpdateForm(instance=post)
+        # 3. 댓글(Comment) 정보도 가져와야 해요
+        comments = post.comment_set.all().order_by('-id')
+
+        context = {
+            "detail_update_form": board_update_form,
+            'comments': comments,
+            'post':post
+        }
+
+        return render(request, 'diary_main/update.html', context)
+
+    else:
+        post.b_title = request.POST['b_title']
+        post.b_content = request.POST['b_content']
+        post.b_map = request.POST['b_map']
+        post.save()
+        return redirect('/diary_main/'+ str(post.id)+'/detail/')
