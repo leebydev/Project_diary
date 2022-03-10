@@ -91,7 +91,7 @@
         <br>
         <h1>새글 작성</h1>
         <p>{{ posts.b_title }}</p>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="list.html" method="POST" enctype="multipart/form-data">
             <!--보안상의 이유로 csfr_token을 넣어줘야한다.-->
             {% csrf_token %}
             <!--이렇게 찍으면 입력이 자동으로 찍힌다!-->
