@@ -5,6 +5,14 @@ function to_list() {
     document.location.href = '/diary_main/list/'
 }
 
+function name_push() {
+    alert('실패했습니다!');
+    let aa = $('#name_load').text()
+    $('#username').val(aa)
+
+}
+
+
 function delete_post() {
     //내가 어떤글을 삭제할지 알아야 함!
     // alert($('#post_id').text())
