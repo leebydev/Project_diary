@@ -5,6 +5,12 @@ function to_list() {
     document.location.href = '/diary_main/list/'
 }
 
+function name_push() {
+    alert('실패했습니다!');
+    let aa = $('#name_load').text()
+    $('#username').val(aa)
+
+}
 
 
 function delete_post() {

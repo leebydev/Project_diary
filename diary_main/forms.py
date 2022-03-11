@@ -58,14 +58,14 @@ class BoardDetailForm(forms.ModelForm):
     class Meta:
         model = Board
         # fields = '__all__'
-        fields= ['b_title','b_content','b_author']
+        fields= ['b_title','b_content','b_author', 'b_like_count']
         labels = {
                     'b_title': '글 제목',
                     # 'b_img': '이미지',
                     'b_author': '글 작성자',
                     'b_content': '글 내용',
                     # 'b_comment_count': '댓글 개수',
-                    # 'b_like_count': '좋아요 개수'
+                    'b_like_count': ''
                 }
 
         widgets = {
@@ -98,11 +98,11 @@ class BoardDetailForm(forms.ModelForm):
             #         'class': 'form-control w-25'
             #     }
             # ),
-            # 'b_like_count': forms.TextInput(
-            #     attrs={
-            #         'class': 'form-control w-25'
-            #     }
-            # )
+            'b_like_count': forms.TextInput(
+                attrs={
+                    'hidden class': 'form-control w-25'
+                }
+            )
         }
 
 
@@ -148,7 +148,7 @@ class BoardUpdateForm(forms.ModelForm):
             #     attrs={
             #         'class': 'form-control w-25'
             #     }
-            # )
+            # ),
             'b_map':forms.TextInput(
                 attrs={
                     'class': 'form-control w-100',
