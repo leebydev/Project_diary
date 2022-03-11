@@ -4,15 +4,16 @@
 <!--프로젝트에 등록해놓은 bootstarp4를 load해서 불러들이고-->
 {% block html_header %}
 <script src="/static/js/menu_btn.js"></script> <!-- js형태로 static에 자바스크립트 만들고 경로를 설정해준다.-->
-<script src="/static/js/test.js"></script>
 {% endblock %}
 
 {% block html_body %}
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="http://127.0.0.1:8000/"><img src="/static/img/7log_icon.png" width="100" height="50"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="http://127.0.0.1:8000/"><img src="/static/img/7log_icon.png" width="100"
+                                                                       height="50"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -28,8 +29,8 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-<!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+                    <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+                    <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
 
                     <!--
                         # 사용자 정보가 호출이되면(로그인 상태라면)
@@ -50,11 +51,11 @@
                         {% endif %}
                     -->
                     <div>
-                        <p style= color:#ffff;>
+                        <p style=color:#ffff;>
 
                             {% if request.user.is_authenticated %}
                             {{ user.nickname }}
-                            <img src="{{ users.image.url }}" width="50" height="50">
+                            <img src="{{ user.image.url }}" width="50" height="50">
                             <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
 
                             {% else %}
@@ -65,18 +66,18 @@
                             {% endif %}
                         </p>
                     </div>
-<!--
-                    <p>
-                        {% if request.user.is_authenticated %}
-                        //<a class="btn btn-lg btn-primary invisible" href="/users/login/">Sign up</a>
-                        //<a class="btn btn-lg btn-primary invisible" href="/users/login/">login</a>
-                        <img src="/static/img/L_002.png" width="50" height="50">
-                        <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
-                        {% else %}
-                        <a class="btn btn-lg btn-info" href="/users/login/">login</a>
-                        {% endif %}
-                    </p>
-                    -->
+                    <!--
+                                        <p>
+                                            {% if request.user.is_authenticated %}
+                                            //<a class="btn btn-lg btn-primary invisible" href="/users/login/">Sign up</a>
+                                            //<a class="btn btn-lg btn-primary invisible" href="/users/login/">login</a>
+                                            <img src="/static/img/L_002.png" width="50" height="50">
+                                            <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
+                                            {% else %}
+                                            <a class="btn btn-lg btn-info" href="/users/login/">login</a>
+                                            {% endif %}
+                                        </p>
+                                        -->
 
                 </form>
             </div>
@@ -97,23 +98,24 @@
             <!--이렇게 찍으면 입력이 자동으로 찍힌다!-->
             <!--        {{ my_form.as_p }}-->
 
-        {% bootstrap_form my_form %} <!--입력상자들-->
-        <br>
-        <div id="map" style="width:100%;height:350px;"></div>
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b1cecff12a8ce2189e4ab1ef565b2b3&libraries=services"></script>
-        <script src="/static/js/map.js"></script>
-        <!--부트스트랩 사용을 위해 bootstrap form을 통해 my_form을 선언해서 사용-->
-        <!--또한 부트스트랩을 사용하기 위해 클래스를 잡아줘야한다.-->
-        <button type="submit" class="btn btn-primary">등록</button> <!--버튼 누르면 /bbs/create/로 보내겠다는 의미-->
-        <button type="button" class="btn btn-secondary"onclick="to_list()">리스트로 돌아가기</button>
+            {% bootstrap_form my_form %} <!--입력상자들-->
+            <br>
+            <div id="map" style="width:100%;height:350px;"></div>
+            <script type="text/javascript"
+                    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b1cecff12a8ce2189e4ab1ef565b2b3&libraries=services"></script>
+            <script src="/static/js/map.js"></script>
+            <!--부트스트랩 사용을 위해 bootstrap form을 통해 my_form을 선언해서 사용-->
+            <!--또한 부트스트랩을 사용하기 위해 클래스를 잡아줘야한다.-->
+            <button type="submit" class="btn btn-primary">등록</button> <!--버튼 누르면 /bbs/create/로 보내겠다는 의미-->
+            <button type="button" class="btn btn-secondary" onclick="to_list()">리스트로 돌아가기</button>
 
             {% if request.user.is_authenticated %}
-                <span style="display:none;" id="name_load">
+            <span style="display:none;" id="name_load">
                     {{ user.nickname }}
                 </span>
             {% endif %}
 
         </form>
-</div>
+    </div>
 </main>
 {% endblock %}

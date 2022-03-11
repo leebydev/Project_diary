@@ -11,9 +11,7 @@ from diary_main.models import *
 class BoardForm(forms.ModelForm):
     class Meta:
         model = Board
-        #fields = "__all__"
         fields = ['b_title', 'b_img', 'b_author', 'b_content','b_map']
-        #
         labels = {
             'b_title': '글 제목',
             'b_img': '이미지',
@@ -21,7 +19,7 @@ class BoardForm(forms.ModelForm):
             'b_content': '글 내용',
             'b_map': '지도입력'
         }
-        #
+
         widgets = {
             'b_title': forms.TextInput(
                 attrs={
@@ -32,7 +30,6 @@ class BoardForm(forms.ModelForm):
             'b_author': forms.TextInput(
                 attrs={
                     'hidden class': 'form-control w-25',
-                    # 'placeholder': '작성자를 입력하세요!'
                     'id': 'username'
                 }
             ),
@@ -57,14 +54,11 @@ class BoardForm(forms.ModelForm):
 class BoardDetailForm(forms.ModelForm):
     class Meta:
         model = Board
-        # fields = '__all__'
         fields = ['b_title', 'b_content', 'b_author', 'b_like_count']
         labels = {
                     'b_title': '글 제목',
-                    # 'b_img': '이미지',
                     'b_author': '글 작성자',
                     'b_content': '글 내용',
-                    # 'b_comment_count': '댓글 개수',
                     'b_like_count': ''
                 }
 
@@ -76,11 +70,6 @@ class BoardDetailForm(forms.ModelForm):
 
                 }
             ),
-            # 'b_img': forms.TextInput(
-            #     attrs={
-            #         'class': 'form-control w-25'
-            #     }
-            # ),
             'b_author': forms.TextInput(
                 attrs={
                     'readonly class': 'form-control-plaintext w-25',
@@ -93,11 +82,6 @@ class BoardDetailForm(forms.ModelForm):
                     'disabled':'readonly'
                 }
             ),
-            # 'b_comment_count': forms.TextInput(
-            #     attrs={
-            #         'class': 'form-control w-25'
-            #     }
-            # ),
             'b_like_count': forms.TextInput(
                 attrs={
                     'hidden class': 'form-control w-25'
@@ -109,15 +93,11 @@ class BoardDetailForm(forms.ModelForm):
 class BoardUpdateForm(forms.ModelForm):
     class Meta:
         model = Board
-        # fields = '__all__'
         fields= ['b_title','b_content','b_map']
         labels = {
             'b_title': '글 제목',
-            # 'b_img': '이미지',
             'b_map':'지도',
             'b_content': '글 내용',
-            # 'b_comment_count': '댓글 개수',
-            # 'b_like_count': '좋아요 개수'
         }
 
         widgets = {
@@ -125,30 +105,14 @@ class BoardUpdateForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control w-75',
 
-
                 }
             ),
-            # 'b_img': forms.TextInput(
-            #     attrs={
-            #         'class': 'form-control w-25'
-            #     }
-            # ),
             'b_content': forms.Textarea(
                 attrs={
                     'class': 'form-control w-100',
 
                 }
             ),
-            # 'b_comment_count': forms.TextInput(
-            #     attrs={
-            #         'class': 'form-control w-25'
-            #     }
-            # ),
-            # 'b_like_count': forms.TextInput(
-            #     attrs={
-            #         'class': 'form-control w-25'
-            #     }
-            # )
             'b_map':forms.TextInput(
                 attrs={
                     'class': 'form-control w-100',

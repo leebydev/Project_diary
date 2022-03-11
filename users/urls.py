@@ -28,7 +28,6 @@ app_name = 'users'
 urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    # path('loginProcess/', views.login_process, name='login_process'),
     path('signup/', views.signup2, name='signup'),
     path('test/', views.home, name='test')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

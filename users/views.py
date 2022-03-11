@@ -9,8 +9,11 @@ from users.models import Member
 # 만든 loginForm 불러오기
 from users.forms import LoginForm
 
+
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
+
+
 
 # Create your views here.
 # 함수명과 장고가 제공해주는 모듈이름이 겹침 주의
@@ -29,6 +32,8 @@ def login(request):
         login_form = LoginForm(request.POST)
         username = login_form.data['username']
         password = login_form.data['password']
+
+
 
         # 로그인 인증처리
         user = authenticate(username=username,
@@ -69,8 +74,9 @@ def home(request):
 
     return HttpResponse('Home!')
 
-# 회원가입
 
+
+# 회원가입
 def signup2(request):
     if request.method == 'POST':
         print(request.POST)
@@ -88,10 +94,6 @@ def signup2(request):
         elif password != password2:
             messages.warning(request, "비밀번호가 일치하지 않습니다")
             return redirect('users:signup')
-
-        # elif Member.objects.filter(username=username).exists():
-        #     messages.warning(request, "아이디가 이미 사용중 입니다.")
-        #     return redirect('users:signup')
 
         else:
             user = Member.objects.create_user(

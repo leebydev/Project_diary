@@ -4,15 +4,13 @@ function new_post() {
 function to_list() {
     document.location.href = '/diary_main/list/'
 }
-
+// 네비바에서 작성자의 닉네임을 가져와 <span>(hidden)으로 설정 그 후 forms.py에 있는 b_author에 값을 넣어줌 (id값 username)
+// 그 값 기준으로 detail에 넣어줌
 function name_push() {
-    alert('실패했습니다!');
     let aa = $('#name_load').text()
     $('#username').val(aa)
 
 }
-
-
 function delete_post() {
     //내가 어떤글을 삭제할지 알아야 함!
     // alert($('#post_id').text())
@@ -106,3 +104,29 @@ function create_comment() {
     })
 }
 
+function delete_coment() {
+    $.ajax({
+        // key와 value널어서 삭제해 주자!
+        async: true,
+        url:'/diary_main/commentDelete',
+        type: 'GET',
+        data: {
+            comment_id: $('#coment_id').text()
+        },
+        dataType: 'json',
+        timeout: 3000,
+        success: function () {
+            // id를 찾아 지우자
+            $('#coment_id_head').remove()
+            // 이렇게 처리하면 화면에서 지울 수 있다!
+            // 서버쪽에서 처리가 되야지 succes가 처리가 되어 화면이 처리가 될테니
+            // url을 만들러 url.py로 이동하자!
+            // 이경우에 ajax처리를 통해 동적으로 버튼을 추가하여 이미 만들어진 댓글은 삭제 불가!
+            // 즉 새로운 이벤트로 추가된 댓글만 삭제가 됨
+            // 그럼 기존에 있던 댓글은 어떻게 제거하는가?
+        },
+        error: function (){
+        alert('에러')
+        }
+    })
+}

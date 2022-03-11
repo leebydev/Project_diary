@@ -34,9 +34,6 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-                    <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
-
                     <!--
                         # 사용자 정보가 호출이되면(로그인 상태라면)
                         # 프로필 사진과 로그아웃 버튼이 보임
@@ -60,7 +57,7 @@
 
                             {% if request.user.is_authenticated %}
                             {{ user.nickname }}
-                            <img src="{{ users.image.url }}" width="50" height="50">
+                            <img src="{{ user.image.url }}" width="50" height="50">
                             <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
 
                             {% else %}
@@ -71,19 +68,6 @@
                             {% endif %}
                         </p>
                     </div>
-                    <!--
-                                        <p>
-                                            {% if request.user.is_authenticated %}
-                                            //<a class="btn btn-lg btn-primary invisible" href="/users/login/">Sign up</a>
-                                            //<a class="btn btn-lg btn-primary invisible" href="/users/login/">login</a>
-                                            <img src="/static/img/L_002.png" width="50" height="50">
-                                            <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
-                                            {% else %}
-                                            <a class="btn btn-lg btn-info" href="/users/login/">login</a>
-                                            {% endif %}
-                                        </p>
-                                        -->
-
                 </form>
             </div>
         </div>
@@ -118,57 +102,60 @@
                 onclick="to_list()">리스트로 돌아가기
         </button>
         {% if post.b_author == user.nickname %}
-            <button class="btn btn-primary"
-                    onclick="location.href ='/diary_main/{{post.id}}/update/';">수정
-            </button>
-            <button class="btn btn-danger"
-                    onclick="delete_post()">삭제
-            </button>
+        <button class="btn btn-primary"
+                onclick="location.href ='/diary_main/{{post.id}}/update/';">수정
+        </button>
+        <button class="btn btn-danger"
+                onclick="delete_post()">삭제
+        </button>
         {% endif %}
         <button class="btn btn-warning"
                 onclick="like_post()">좋아요
         </button>
         <input type="hidden" id="map_location" value="{{ post.b_map}}">
     </div>
-<br><br>
+    <br><br>
 
-<div class="container">
-    <h3>댓글</h3>
-    <label for="c_name"></label>
+    <div class="container">
+        <h3>댓글</h3>
+        <label for="c_name"></label>
 
-    <input type="text"
-           hidden class="form-control w-25"
-           id="c_name"
-           value="{{ user.nickname }}">
-    {% if request.user.is_authenticated %}
-    <label for="c_content">내용</label>
-    <input type="text"
-           class="form-control w-50"
-           id="c_content">
-    <button type="button"
-            class="btn btn-info"
-            onclick="create_comment()">댓글 등록</button>
-    {% endif %}
+        <input type="text"
+               hidden class="form-control w-25"
+               id="c_name"
+               value="{{ user.nickname }}">
+        {% if request.user.is_authenticated %}
+        <label for="c_content">내용</label>
+        <input type="text"
+               class="form-control w-50"
+               id="c_content">
+        <button type="button"
+                class="btn btn-info"
+                onclick="create_comment()">댓글 등록
+        </button>
+        {% endif %}
 
-    <table class="table table-hover">
-        <thead class="thread-dark">
+        <table class="table table-hover">
+            <thead class="thread-dark">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col" hidden>#</th>
                 <th scope="col">댓글 작성자</th>
                 <th scope="col">댓글 내용</th>
                 <th scope="col">삭제</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for comment in comments %}
-            <tr>
-                <td>{{ comment.id }}</td>
+            <tr id="coment_id_head">
+                <td hidden id="coment_id">{{ comment.id }}</td>
                 <td>{{ comment.c_author }}</td>
                 <td>{{ comment.c_content }}</td>
-                <td><button class="btn btn-danger">삭제333</button></td>
+                <td>
+                    <button class="btn btn-danger" onclick="delete_coment()">삭제</button>
+                </td>
             </tr>
             {% endfor %}
-        </tbody>
+            </tbody>
         </table>
     </div>
     <br><br><br>
