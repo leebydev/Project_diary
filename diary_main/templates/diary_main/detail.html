@@ -8,6 +8,12 @@
         width: 300px;
         height: 300px;
     }
+
+    .box {
+            width: 50px;
+            height: 50px;
+            border-radius: 70%;
+            overflow: hidden;
 </style>
 {% endblock %}
 
@@ -53,11 +59,13 @@
                         {% endif %}
                     -->
                     <div>
-                        <p style=color:#ffff;>
+                        <p style= color:#ffff;>
 
                             {% if request.user.is_authenticated %}
                             {{ user.nickname }}
-                            <img src="{{ user.image.url }}" width="50" height="50">
+                            &nbsp&nbsp&nbsp&nbsp
+                            <img class="box" src="{{ user.image.url }}" width="50" height="50">
+                            &nbsp&nbsp&nbsp&nbsp
                             <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
 
                             {% else %}
