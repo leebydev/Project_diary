@@ -58,7 +58,7 @@ class BoardDetailForm(forms.ModelForm):
     class Meta:
         model = Board
         # fields = '__all__'
-        fields= ['b_title','b_content','b_author', 'b_like_count']
+        fields = ['b_title', 'b_content', 'b_author', 'b_like_count']
         labels = {
                     'b_title': '글 제목',
                     # 'b_img': '이미지',
@@ -148,7 +148,7 @@ class BoardUpdateForm(forms.ModelForm):
             #     attrs={
             #         'class': 'form-control w-25'
             #     }
-            # ),
+            # )
             'b_map':forms.TextInput(
                 attrs={
                     'class': 'form-control w-100',

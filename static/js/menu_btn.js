@@ -5,14 +5,6 @@ function to_list() {
     document.location.href = '/diary_main/list/'
 }
 
-function name_push() {
-    alert('실패했습니다!');
-    let aa = $('#name_load').text()
-    $('#username').val(aa)
-
-}
-
-
 function delete_post() {
     //내가 어떤글을 삭제할지 알아야 함!
     // alert($('#post_id').text())
@@ -81,7 +73,8 @@ function create_comment() {
                     timeout: 3000,
                     success: function () {
                         // id를 찾아 지우자
-                        $('#comment_'+ result['c_id']).remove() // 이렇게 처리하면 화면에서 지울 수 있다!
+                        $('#comment_'+ result['c_id']).remove()
+                        // 이렇게 처리하면 화면에서 지울 수 있다!
                         // 서버쪽에서 처리가 되야지 succes가 처리가 되어 화면이 처리가 될테니
                         // url을 만들러 url.py로 이동하자!
                         // 이경우에 ajax처리를 통해 동적으로 버튼을 추가하여 이미 만들어진 댓글은 삭제 불가!
@@ -104,3 +97,4 @@ function create_comment() {
         }
     })
 }
+

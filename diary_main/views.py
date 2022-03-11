@@ -5,7 +5,6 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_safe
 
-
 def b_list(request):
     # if request.user.is_authenticated:
     posts = Board.objects.all().order_by('-id')
@@ -73,6 +72,30 @@ def b_detail(request, board_id):
     return render(request, 'diary_main/detail.html', context)
 
 
+
+# def b_delete(request):
+#     # QueryString으로 전달된 삭제할 글 번호부터 뽑아요
+#     post_id = request.GET['post_id']
+#     post = get_object_or_404(Board, pk=post_id)
+#     post.delete()
+#
+#     return redirect('bbs:b_list')
+
+
+# def b_like(request):
+#     post_id = request.GET['post_id']
+#     post = get_object_or_404(Board, pk=post_id)
+#     post.b_like_count += 1
+#     post.save()
+#
+#     board_detail_form = BoardDetailForm(instance=post)
+#     context = {
+#         "detail_form": board_detail_form
+#     }
+#
+#     return render(request, 'diary_main/detail.html', context)
+
+
 def b_delete(request):
     # QueryString으로 전달된 삭제할 글 번호부터 뽑아요
     post_id = request.GET['post_id']
@@ -85,6 +108,7 @@ def b_delete(request):
 def b_like(request):
     post_id = request.GET['post_id']
     post = get_object_or_404(Board, pk=post_id)
+    # post.b_like_count += 1
     # context = {
     #     'post': post
     # }
@@ -94,7 +118,7 @@ def b_like(request):
     board_detail_form = BoardDetailForm(instance=post)
     context = {
         "detail_form": board_detail_form,
-        "post": post
+        'post': post
     }
     post.save()
 
@@ -122,7 +146,7 @@ def create_comment(request):
         json_dumps_params={'ensure_ascii': True})
 
 
-def delete_comment(request):
+def comment_delete(request):
     comment = get_object_or_404(Comment, pk=request.GET['comment_id'])
     comment.delete()
     return JsonResponse({}, json_dumps_params={'ensure_ascii': True})
@@ -140,7 +164,7 @@ def b_update(request, board_id):
         context = {
             "detail_update_form": board_update_form,
             'comments': comments,
-            'post': post
+            'post':post
         }
 
         return render(request, 'diary_main/update.html', context)
@@ -150,4 +174,4 @@ def b_update(request, board_id):
         post.b_content = request.POST['b_content']
         post.b_map = request.POST['b_map']
         post.save()
-        return redirect('/diary_main/' + str(post.id) + '/detail/')
+        return redirect('/diary_main/'+ str(post.id)+'/detail/')

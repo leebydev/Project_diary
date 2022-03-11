@@ -34,5 +34,7 @@ urlpatterns = [
     path('<int:board_id>/update/', views.b_update, name='b_update'),
     path('like/', views.b_like, name='b_like'),
     path('delete/', views.b_delete, name='b_delete'),
+    path('createComment/', views.create_comment, name='create_comment'),
+    path('commentDelete/', views.comment_delete, name='comment_delete'),
 ] + static(settings.MEDIA_URL,
            document_root=settings.MEDIA_ROOT)
