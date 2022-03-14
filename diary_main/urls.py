@@ -31,7 +31,10 @@ urlpatterns = [
     # path('users/', include('users.urls')), # users로 시작하면 users밑에있는 users.urls.py에서 처리하겠다는 의미
     path('list/', views.b_list, name='b_list'),
     path('<int:board_id>/detail/', views.b_detail, name='b_detail'),
+    path('<int:board_id>/update/', views.b_update, name='b_update'),
     path('like/', views.b_like, name='b_like'),
     path('delete/', views.b_delete, name='b_delete'),
+    path('createComment/', views.create_comment, name='create_comment'),
+    path('commentDelete/', views.comment_delete, name='comment_delete'),
 ] + static(settings.MEDIA_URL,
            document_root=settings.MEDIA_ROOT)

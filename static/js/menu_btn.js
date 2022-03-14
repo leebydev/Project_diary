@@ -4,14 +4,13 @@ function new_post() {
 function to_list() {
     document.location.href = '/diary_main/list/'
 }
+// 네비바에서 작성자의 닉네임을 가져와 <span>(hidden)으로 설정 그 후 forms.py에 있는 b_author에 값을 넣어줌 (id값 username)
+// 그 값 기준으로 detail에 넣어줌
+function name_push() {
+    let aa = $('#name_load').text()
+    $('#username').val(aa)
 
-// function name_push() {
-//     alert('실패했습니다!');
-//     let aa = $('#name_load').text()
-//     $('#username').val(aa)
-//
-// }
-
+}
 function delete_post() {
     //내가 어떤글을 삭제할지 알아야 함!
     // alert($('#post_id').text())
@@ -30,7 +29,6 @@ function like_post() {
 }
 
 // 댓글등록하는 AJAX
-
 function create_comment() {
     $.ajax({
         async: true,
@@ -47,9 +45,9 @@ function create_comment() {
         success: function(result) {
             // 이제 json을통해 데이터를 가져와 화면에 띄워준다.
             // 결과로 오는 result 는 이렇게 생겼고
-            //     'c_id': create_comment.id,
-            //     'c_author': create_comment.c_author,
-            //     'c_content': create_comment.c_content
+            //     'c_id': comment.id,
+            //     'c_author': comment.c_author,
+            //     'c_content': comment.c_content
             // 호면 구성은 이렇게 생김
             // <tr>
             //     <td>{{comment.c_author}}</td>
@@ -81,7 +79,8 @@ function create_comment() {
                     timeout: 3000,
                     success: function () {
                         // id를 찾아 지우자
-                        $('#comment_'+ result['c_id']).remove() // 이렇게 처리하면 화면에서 지울 수 있다!
+                        $('#comment_'+ result['c_id']).remove()
+                        // 이렇게 처리하면 화면에서 지울 수 있다!
                         // 서버쪽에서 처리가 되야지 succes가 처리가 되어 화면이 처리가 될테니
                         // url을 만들러 url.py로 이동하자!
                         // 이경우에 ajax처리를 통해 동적으로 버튼을 추가하여 이미 만들어진 댓글은 삭제 불가!
@@ -100,32 +99,34 @@ function create_comment() {
             $('tbody').prepend(tr)
         },
         error: function() {
-            alert('먼가 이상해요!')
+            alert('댓글을 작성해주세요!')
         }
     })
 }
 
-
-/*
-function create_comment() {
+function delete_comment() {
     $.ajax({
+        // key와 value널어서 삭제해 주자!
         async: true,
-        url: "/diary_main/createComment/",
+        url:'/diary_main/commentDelete',
         type: 'GET',
         data: {
-            // 댓글에대한 게시글 id, 댓글에대한 작성자, 댓글 내용이 필요
-            board_id: $('#post_id').text(),
-            comment_author: $('#c_name').val(),
-            comment_content: $('#c_content').val()
+            comment_id: $('#comment_id').text()
         },
-        dataType: 'json',   // 서버프로그램이 결과로 돌려주는 값은 JSON
+        dataType: 'json',
         timeout: 3000,
-        success: function(result) {
-            alert('seccuss');
+        success: function () {
+            // id를 찾아 지우자
+            $('#comment_id_head').remove()
+            // 이렇게 처리하면 화면에서 지울 수 있다!
+            // 서버쪽에서 처리가 되야지 succes가 처리가 되어 화면이 처리가 될테니
+            // url을 만들러 url.py로 이동하자!
+            // 이경우에 ajax처리를 통해 동적으로 버튼을 추가하여 이미 만들어진 댓글은 삭제 불가!
+            // 즉 새로운 이벤트로 추가된 댓글만 삭제가 됨
+            // 그럼 기존에 있던 댓글은 어떻게 제거하는가?
         },
         error: function (){
-            alert('먼가 이상해요!')
+        alert('에러')
         }
     })
 }
-*/

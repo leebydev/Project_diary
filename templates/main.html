@@ -1,14 +1,10 @@
 
 <!doctype html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="utf-8">
     <title>7log</title>
-
-    <!-- 구글 폰트 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
 
@@ -30,9 +26,6 @@
 
 
     <style>
-        /* font family 수정하기 */
-        .logo_font{font-family: 'Hi Melody', cursive;}
-        p{font-family: 'Hi Melody', cursive;}
 
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -47,6 +40,22 @@
                 font-size: 3.5rem;
             }
         }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            border-radius: 70%;
+            overflow: hidden;
+        }
+
+        @font-face {
+            font-family: 'GangwonEdu_OTFBoldA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body{font-family: 'GangwonEdu_OTFBoldA';}
     </style>
 
 
@@ -71,7 +80,7 @@
                         <a class="nav-link" href="/howtouse/">how to use</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/dashboard/">DashBoard</a>
+                        <a class="nav-link" aria-current="page" href="/diary_main/list/">DashBoard</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -101,7 +110,9 @@
 
                             {% if request.user.is_authenticated %}
                             {{ user.nickname }}
-                            <img src="{{ users.image.url }}" width="50" height="50">
+
+                            <img class="box" src="{{ user.image.url }}" width="50" height="50">
+
                             <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
 
                             {% else %}
@@ -143,12 +154,10 @@
 
                 <div class="container">
                     <div class="carousel-caption text-start">
-                        <h1 class="logo_font">7log에 오신것을 환영합니다 :D</h1>
-                        <p>사진 한장으로 남기는 나의 일상</p>
+                        <h1 style="color: #6c757d">7log에 오신것을 환영합니다 :D</h1>
+                        <p style="color: #6c757d">사진 한장으로 남기는 나의 일상</p>
 <!--                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>-->
                         <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-lg btn-primary" type="submit">Search</button>
 <!--                            <p><a class="btn btn-lg btn-primary" href="/users/login">Sign up</a></p>-->
                         </form>
                     </div>
@@ -194,9 +203,9 @@
             <div class="col-lg-4">
                 <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#777"/>
+                    <rect width="100%" height="100%" fill="#fff"/>
                     <text x="50%" y="50%" fill="#ffff" dy=".3em">140x140</text>
-                    <image x="3" y="-3" width="150" height="150" href="/static/img/L_005.png"/>
+                    <image x="0" y="0" width="140" height="140" href="/static/img/about_img.png"/>
                 </svg>
 
                 <br><br>
@@ -208,9 +217,9 @@
                 <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
                      xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
                      preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#777"/>
+                    <rect width="100%" height="100%" fill="#fff"/>
                     <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-                    <image x="3" y="-3" width="150" height="150" href="/static/img/L_008.png"/>
+                    <image x="0" y="0" width="140" height="140" href="/static/img/howtouse_img.png"/>
                 </svg>
 
                 <br><br>
@@ -222,15 +231,15 @@
                 <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
                      xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
                      preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#777"/>
+                    <rect width="100%" height="100%" fill="#fff"/>
                     <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-                    <image x="3" y="-3" width="150" height="150" href="/static/img/L_002.png"/>
+                    <image x="0" y="0" width="140" height="140" href="/static/img/dashboard_img.png"/>
                 </svg>
 
                 <br><br>
                 <h2>DashBoard</h2>
                 <p>이제 이야기를 시작할 시간입니다!<br>다양한 라이프 스타일을 만나보세요!</p>
-                <p><a class="btn btn-secondary" href="/dashboard/">View details &raquo;</a></p>
+                <p><a class="btn btn-secondary" href="/diary_main/list">View details &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
 
