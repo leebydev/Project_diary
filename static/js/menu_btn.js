@@ -30,10 +30,11 @@ function like_post() {
 }
 
 // 댓글등록하는 AJAX
+
 function create_comment() {
     $.ajax({
         async: true,
-        url: "/bbs/createComment/",
+        url: "/diary_main/createComment/",
         type: 'GET',
         data: {
             // 댓글에대한 게시글 id, 댓글에대한 작성자, 댓글 내용이 필요
@@ -46,9 +47,9 @@ function create_comment() {
         success: function(result) {
             // 이제 json을통해 데이터를 가져와 화면에 띄워준다.
             // 결과로 오는 result 는 이렇게 생겼고
-            //     'c_id': comment.id,
-            //     'c_author': comment.c_author,
-            //     'c_content': comment.c_content
+            //     'c_id': create_comment.id,
+            //     'c_author': create_comment.c_author,
+            //     'c_content': create_comment.c_content
             // 호면 구성은 이렇게 생김
             // <tr>
             //     <td>{{comment.c_author}}</td>
@@ -71,7 +72,7 @@ function create_comment() {
                 $.ajax({
                     // key와 value널어서 삭제해 주자!
                     async: true,
-                    url:'/bbs/commentDelete',
+                    url:'/diary_main/commentDelete',
                     type: 'GET',
                     data: {
                         comment_id: result['c_id']
@@ -103,3 +104,28 @@ function create_comment() {
         }
     })
 }
+
+
+/*
+function create_comment() {
+    $.ajax({
+        async: true,
+        url: "/diary_main/createComment/",
+        type: 'GET',
+        data: {
+            // 댓글에대한 게시글 id, 댓글에대한 작성자, 댓글 내용이 필요
+            board_id: $('#post_id').text(),
+            comment_author: $('#c_name').val(),
+            comment_content: $('#c_content').val()
+        },
+        dataType: 'json',   // 서버프로그램이 결과로 돌려주는 값은 JSON
+        timeout: 3000,
+        success: function(result) {
+            alert('seccuss');
+        },
+        error: function (){
+            alert('먼가 이상해요!')
+        }
+    })
+}
+*/

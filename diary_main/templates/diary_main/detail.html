@@ -9,10 +9,7 @@
         height: 300px;
     }
 </style>
-{% endblock %}
 
-{% block html_body %}
-<header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="http://127.0.0.1:8000/"><img src="/static/img/7log_icon.png" width="100"
@@ -88,7 +85,9 @@
             </div>
         </div>
     </nav>
-</header>
+{% endblock %}
+
+{% block html_body %}
 <main>
     <div class="container px-4 py-5">
         <h1 class="visually-hidden">공백삽입</h1>
@@ -125,8 +124,8 @@
     <input type="hidden" id="map_location" value="{{ post.b_map}}">
 </div>
 <br><br>
-
-<div class="container">
+<form>
+<div class="container" id="comment">
     <h3>댓글</h3>
     <label for="c_name">이름</label>
     <input type="text"
@@ -160,6 +159,7 @@
             </tbody>
         </table>
     </div>
+</form>
     <br><br><br>
 </main>
 {% endblock %}
